@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>BrandList</title>
+    <!-- custom css file link -->
+    <!--<link rel="stylesheet" href="css/style.css">-->
+    <!--custom js file link-->
+    <!--<script src="js/script.js"></script>-->
+    <script src="https://cdn.jsdelivr.net/npm/axios@1.1.2/dist/axios.min.js"></script>
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+</head>
+<body>
+
+<!-- header section starts -->
+<div include-html="header_user_unlogin.html"></div>
+<!-- header section ends -->
+
+<!--<h1>${user.username}, 歡迎您</h1>-->
+<div id="app">
+    <input type="button" value="新增" id="add" @click="addBrand"><br>
+    <hr>
+    <table id="brandTable" border="1" cellspacing="0" width="100%">
+        <tr>
+            <th>序號</th>
+            <th>品牌名稱</th>
+            <th>企業名稱</th>
+            <th>排序</th>
+            <th>狀態</th>
+            <th>操作</th>
+        </tr>
+
+        <tr v-for="(brand, i) in brands" align="center">
+            <td>{{i + 1}}</td>
+            <td>{{brand.brandName}}</td>
+            <td>{{brand.companyName}}</td>
+            <td>{{brand.ordered}}</td>
+            <td>{{brand.description}}</td>
+            <td>{{brand.statusStr}}</td>
+            <td><a href="/brand-demo/selectByIdServlet?id=${brand.id}">修改</a><a
+                    href="/brand-demo/deleteByIdServlet?id=${brand.id}">刪除</a></td>
+        </tr>
+    </table>
+</div>
+<!-- footer section starts -->
+<div include-html="footer_unlogin.html"></div>
+<!-- footer section ends -->
+
+<script>
+    // includeHTML();
+
+    // document.getElementById("add").onclick = function () {
+    //     location.href = "/brand-demo/addBrand.html";
+    // }
+
+    const {createApp} = Vue
+
+    createApp({
+        data() {
+            return {
+                brands: []
+            }
+        },
+        mounted() {
+            const _this = this;
+            axios.post('http://192.168.0.10:8080/brand-demo/selectAllServlet').then(function (response) {
+                _this.brands = response.data;
+            });
+        },
+        setup() {
+
+        },
+        methods: {
+            addBrand(event) {
+                location.href = "http://192.168.0.10:8080/brand-demo/addBrand.html";
+            }
+        }
+    }).mount('#app')
+
+    // window.onload = function () {
+    //   axios.get('http://192.168.0.10:8080/brand-demo/selectAllServlet').then(function (response) {
+    //     let brands = response.data;
+    //     let tableData = "<tr>\n" +
+    //             "    <th>序號</th>\n" +
+    //             "    <th>品牌名稱</th>\n" +
+    //             "    <th>企業名稱</th>\n" +
+    //             "    <th>排序</th>\n" +
+    //             "    <th>狀態</th>\n" +
+    //             "    <th>操作</th>\n" +
+    //             "  </tr>";
+    //     for (let i = 0; i < brands.length; i++) {
+    //       let brand = brands[i];
+    //
+    //       tableData += "\n" +
+    //               "<tr align=\"center\">\n" +
+    //               "      <td>"+(i+1)+"</td>\n" +
+    //               "      <td>"+brand.brandName+"</td>\n" +
+    //               "      <td>"+brand.companyName+"</td>\n" +
+    //               "      <td>"+brand.ordered+"</td>\n" +
+    //               "      <td>"+brand.description+"</td>\n" +
+    //               "      <td>"+brand.status+"</td>\n" +
+    //               "      <td><a href=\"/brand-demo/selectByIdServlet?id=\" + brand.id>修改</a><a href=\"/brand-demo/deleteByIdServlet?id=\" + brand.id>刪除</a></td>\n" +
+    //               "    </tr>"
+    //
+    //     }
+    //     document.getElementById("brandTable").innerHTML = tableData;
+    //   });
+    // }
+</script>
+</body>
+</html>

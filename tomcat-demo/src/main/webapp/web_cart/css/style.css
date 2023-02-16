@@ -1,0 +1,275 @@
+@import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css');
+
+:root{
+    --gray: #929191;
+    --black:#1e2f3f;
+    --light-black:#323e48;
+    --link-color:#1b4d76;
+    --light-color:#666;
+    --more-light-color:#777;
+    --white:#fff;
+    --light-bg:#eee;
+    --box-shadow:0 .5rem 1rem rgba(0, 0, 0, .1);
+    --border: .1rem solid rgba(0, 0, 0, .3);
+}
+
+*{
+    margin: 0; padding: 0;
+    box-sizing: border-box;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    outline: none; border: none;
+    text-decoration: none;
+    text-transform: capitalize;
+    transition: .2s linear;
+}
+
+::-webkit-scrollbar{
+    width: 1rem;
+    height: .5rem;
+}
+
+::-webkit-scrollbar-track{
+    background-color: transparent;
+}
+
+::-webkit-scrollbar-thumb{
+    background-color: var(--black);
+}
+
+html{
+    font-size: 62.5%;   
+    scroll-behavior: smooth;
+    scroll-padding-top: 6rem;
+    overflow-x: hidden;
+}
+
+body{
+    background-color: var(--light-bg);
+}
+
+section{
+    padding: 2rem 9%;
+    margin: 0 auto;
+    
+}
+
+header{
+    position: sticky;
+    top: 0; left: 0; right: 0;
+    background: var(--black);
+    padding: 2rem 7%;
+    display: flex;
+    flex-wrap: nowrap;
+    align-items: center;
+    justify-content: space-between;
+    z-index: 1000;
+    box-shadow: var(--box-shadow);
+}
+
+header .logo{
+    font-size: 3rem;
+    color: var(--white);
+    font-weight: bolder;
+}
+
+header .logo span{
+    color: var(--gray);
+}
+
+header .navbar a{
+    font-size: 2rem;
+    padding: 0 1.5rem;
+    color: var(--light-color);
+}
+
+header .navbar a:hover{
+    color: var(--light-bg);
+}
+
+header #toggler{
+    display: none;
+}
+
+header .fa-bars{
+    font-size: 3rem;
+    color: var(--light-color);
+    border-radius: .5rem;
+    padding: .5rem 1.5rem;
+    cursor: pointer;
+    border: var(--border);
+    display: none;
+}
+
+.footer .grid{
+    display: grid;
+    grid-template-columns: repeat(auto-fit, 30rem);
+    gap: 1.5rem;
+    justify-content: center;
+    align-items: flex-start;
+}
+
+.footer .grid .box h3{
+    font-size: 2rem;
+    color: var(--black);
+    margin: 1rem;
+    text-transform: capitalize;
+}
+
+.footer .grid .box a{
+    display: block;
+    padding: 1rem 0;
+    font-size: 1.6rem;
+    color: var(--black);
+}
+
+.footer .grid .box a i{
+    color: var(--black);
+    margin-right: .8rem;
+    transition: .2 linear;
+}
+
+.footer .grid .box a:hover i{
+    margin-right: 2rem;
+}
+
+.footer .developer{
+    text-align: center;
+    padding: 1rem 2rem;
+    font-size: 2rem;
+    background-color: var(--white);
+    color: var(--black);
+    border-top: var(--box-shadow);
+    line-height: 1.5;
+}
+
+.footer .developer span{
+    color: var(--light-black);
+    text-transform: capitalize;
+}
+
+.account-form-container{
+    background-size: cover;
+    background: rgba(0, 0, 0, .7) no-repeat fixed center;
+    background-blend-mode: color;
+}
+
+.account-form-container .account-form{
+    min-height: 80vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+}
+
+.account-form-container .account-form form{
+    background-color: var(--white);
+    border-radius: 1rem;
+    padding: 3rem 2rem;
+    width: 50rem;
+    text-align: center;
+}
+
+.account-form-container .account-form h3{
+    font-size: 2.5rem;
+    color: var(--black);
+    text-transform: capitalize;
+    margin-bottom: 1rem;
+}
+
+.account-form-container .account-form form .input{
+    width: 100%;
+    margin: 1rem 0;
+    font-size: 1.8rem;
+    padding: 1.4rem;
+    background-color: var(--light-bg);
+    border-radius: .5rem;
+    text-transform: none;
+}
+
+.account-form-container .account-form form p{
+    padding: 1rem 0;
+    font-size: 1.6rem;
+    color: var(--more-light-color);
+}
+
+.account-form-container .account-form form p a{
+    color: var(--link-color);
+}
+
+.account-form-container .account-form form p a:hover{
+    color: var(--black);
+    text-decoration: underline;
+}
+
+.account-form-container .account-form form .btn{
+    display: inline-block;
+    width: 100%;
+    margin-top: 1rem;
+    padding: 1rem 3rem;
+    font-size: 1.8rem;
+    cursor: pointer;
+    background-color: var(--black);
+    color: var(--white);
+    border-radius: .5rem;
+    text-transform: capitalize;
+    text-align: center;
+}
+
+.account-form-container .account-form form .btn:hover{
+    background-color: var(--light-black);
+}
+
+
+
+
+/* media queries */
+@media (max-width:991px){
+    html{
+        font-size: 55%;
+    }
+
+    header{
+        padding: 2rem;
+    }
+
+    section{
+        padding: 2rem;
+    }
+}
+
+@media (max-width:768px){
+    html .fa-bars{
+        display: block;
+    }
+
+    header .navbar{
+        position: absolute;
+        top: 99%; left: 0; right: 0;
+        background: var(--light-black);
+        border-top: var(--box-shadow);
+        clip-path: polygon(0 0, 100% 0, 100% 0, 0 0);
+    }
+
+    header #toggler:checked ~ .navbar{
+        clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
+    }
+
+    header .navbar a{
+        color: #eee;
+        margin: 1.5rem;
+        padding: 1.5rem;
+        /* background: var(--white); */
+        border: var(--box-shadow);
+        display: block;
+    }
+}
+
+@media (max-width:450px){
+    html{
+        font-size: 50%;
+    }
+
+    .heading{
+        font-size: 3rem;
+    }
+}

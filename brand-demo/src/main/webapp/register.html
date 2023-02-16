@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>register</title>
+
+    <!-- custom css file link -->
+    <link rel="stylesheet" href="css/style.css">
+    <!-- custom js file link -->
+    <script src="js/script.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/axios@1.1.2/dist/axios.min.js"></script>
+    
+</head>
+<body>
+    <!-- header section starts -->
+    <div include-html="header_user_unlogin.html"></div>
+    <!-- header section ends -->
+
+    <!-- login section starts -->
+    <div class="account-form-container">
+        <section class="account-form">
+            <form action="/registerServlet" method="post">
+                <h3> Join us ! </h3>
+                <input type="text" required name="username" id="username" maxlength="16" placeholder="enter your account" class="input">
+                <div id="username_error" style="display: none">username already exists</div>
+                <input type="email" required name="email" id="email" maxlength="50" placeholder="enter your email" class="input">
+                <input type="password" required name="password" id="password" maxlength="30" placeholder="enter your password" class="input">
+                <input type="password" required name="confirm_password" id="confirm_password" maxlength="30" placeholder="confirm your password" class="input">
+                <input type="text" required name="checkCode" id="checkCode" class="input">
+                <img src="/brand-demo/checkCodeServlet" id="checkCodeImage">
+                <a href="#" id="changelog">看不清?</a>
+                <p>already have an account? <a href="login.html">login now</a></p>
+                <input type="submit" value="Register" name="submit" class="btn">
+
+            </form>
+        </section>
+    </div>
+    
+    <!-- login section ends -->
+
+    <!-- footer section starts -->
+    <div include-html="footer_unlogin.html"></div>
+    <!-- footer section ends -->
+
+    
+
+    <!-- loading js method -->
+    <script>
+        includeHTML();
+
+        document.getElementById("changelog").onclick = function () {
+            document.getElementById("checkCodeImage").src = "/brand-demo/checkCodeServlet?" + new Date().getMilliseconds();
+        }
+
+        document.getElementById("checkCodeImage").onclick = function () {
+            document.getElementById("checkCodeImage").src = "/brand-demo/checkCodeServlet?" + new Date().getMilliseconds();
+        }
+
+        document.getElementById("username").onblur = function () {
+
+            let username = this.value;
+            // axios.get("http://localhost:8080/brand-demo/selectUserServlet?username="+username).then(function (resp) {
+            //     if(resp.data) {
+            //         document.getElementById("username_error").style.display = '';
+            //     } else {
+            //         document.getElementById("username_error").style.display = 'none';
+            //     }
+            // });
+
+            axios.post("http://192.168.0.10:8080/brand-demo/selectUserServlet", "username="+username).then(function (resp) {
+                if(resp.data) {
+                    document.getElementById("username_error").style.display = '';
+                } else {
+                    document.getElementById("username_error").style.display = 'none';
+                }
+            });
+
+
+            // let xhttp;
+            // if (window.XMLHttpRequest) {
+            //     xhttp = new XMLHttpRequest();
+            // } else {
+            //     // code for IE6, IE5
+            //     xhttp = new ActiveXObject("Microsoft.XMLHTTP");
+            // }
+            // // send request
+            // xhttp.open("GET", "http://localhost:8080/brand-demo/selectUserServlet?username="+username);
+            // xhttp.send();
+            //
+            // // get response
+            // xhttp.onreadystatechange = function() {
+            //     if (this.readyState == 4 && this.status == 200) {
+            //
+            //         if(this.responseText == "true") {
+            //             document.getElementById("username_error").style.display = '';
+            //         } else {
+            //             document.getElementById("username_error").style.display = 'none';
+            //         }
+            //     }
+            // };
+        }
+    </script>
+</body>
+</html>

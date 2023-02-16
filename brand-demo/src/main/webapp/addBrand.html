@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <!-- custom css file link -->
+    <!--<link rel="stylesheet" href="css/style.css">-->
+    <!--custom js file link-->
+    <!--<script src="js/script.js"></script>-->
+    <script src="https://cdn.jsdelivr.net/npm/axios@1.1.2/dist/axios.min.js"></script>
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+</head>
+<body>
+<!-- header section starts -->
+<div include-html="header_user_unlogin.html"></div>
+<!-- header section ends -->
+<div id="app">
+    <h3>添加品牌</h3>
+    <form id="addBrand" action="/brand-demo/addServlet" method="post">
+        品牌名稱: <input id="brandName" v-model="brand.brandName" name="brandName"><br>
+        企業名稱: <input id="companyName" v-model="brand.companyName" name="companyName"><br>
+        排序: <input id="ordered" v-model="brand.ordered" name="ordered"><br>
+        描述信息: <textarea id="description" v-model="brand.description" rows="5" cols="20" name="description"></textarea><br>
+        狀態: <input type="radio" v-model="brand.status" name="status" value="0">禁用
+        <input type="radio" v-model="brand.status" name="status" value="1">啟用<br>
+
+        <input type="button" id="btn" @click="submitForm" value="提交">
+    </form>
+</div>
+
+
+<!-- footer section starts -->
+<div include-html="footer_unlogin.html"></div>
+<!-- footer section ends -->
+<script>
+
+    // includeHTML();
+
+    const {createApp} = Vue
+
+    createApp({
+        data() {
+            return {
+                brand: {}
+            }
+        },
+        methods: {
+            submitForm(event) {
+                const _this = this;
+                axios.post('http://192.168.0.10:8080/brand-demo/addServlet', _this.brand).then(function (response) {
+                    alert(response.data);
+                    if (response.data == "successful") {
+                        location.href = "http://192.168.0.10:8080/brand-demo/brand.html";
+                    }
+                });
+            }
+        }
+    }).mount('#app')
+
+
+    // document.getElementById("btn").onclick = function () {
+    //     let formData = {
+    //             "brandName": document.getElementById("brandName").value,
+    //             "companyName": document.getElementById("companyName").value,
+    //             "ordered": document.getElementById("ordered").value,
+    //             "description": document.getElementById("description").value,
+    //             "status":""
+    //         };
+    //
+    //     let status = document.getElementsByName("status");
+    //     for (let i = 0; i < status.length; i++) {
+    //         if (status[i].checked) {
+    //             formData.status = status[i].value;
+    //         }
+    //     }
+    //
+    //
+    // }
+</script>
+</body>
+</html>
